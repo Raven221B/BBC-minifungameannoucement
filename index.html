@@ -1,931 +1,1219 @@
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="BBC Mini Fun Game official announcement, schedule, fees, prizes, scoring system, tournament rules and tie-breakers.">
-<title>BBC Mini Fun Game | Official Announcement</title>
+<title>BBC Mini Fun Game | Player Schedule</title>
 
 <style>
+:root {
+    color-scheme: dark;
+    --bg: #0b1220;
+    --panel: #141e30;
+    --line: #334155;
+    --text: #f1f5f9;
+    --muted: #becbdd;
+    --accent: #a3e635;
+}
+
 * {
     box-sizing: border-box;
 }
 
 body {
     margin: 0;
-    background: #f0f4f3;
-    color: #18332d;
-    font: 16px/1.65 system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.5 system-ui,sans-serif;
 }
 
 main {
-    max-width: 800px;
+    max-width: 1250px;
     margin: auto;
-    padding: 20px;
+    padding: 24px;
+}
+
+header,.panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 24px;
+    margin-bottom: 18px;
 }
 
 header {
-    background: #103b32;
-    color: white;
-    padding: 35px 26px;
-    border-radius: 20px;
+    background: linear-gradient(120deg,#1a3028,#141e30 70%);
 }
 
 h1 {
-    font-size: clamp(28px, 6vw, 46px);
-    line-height: 1.1;
-    margin: 12px 0;
-}
-
-header small {
-    letter-spacing: 2px;
-    color: #b9e6c9;
-}
-
-header p {
-    margin-bottom: 0;
-}
-
-section {
-    background: white;
-    padding: 22px;
-    border-radius: 15px;
-    margin: 16px 0;
-    border: 1px solid #d8e4df;
+    font-size: clamp(26px,5vw,44px);
+    line-height: 1.12;
+    margin: 8px 0;
 }
 
 h2 {
     font-size: 21px;
-    margin: 0 0 12px;
-}
-
-h3 {
-    font-size: 17px;
-    margin-bottom: 5px;
+    margin: 0 0 14px;
 }
 
 p {
     margin: 8px 0;
 }
 
-ul, ol {
-    padding-left: 22px;
+.eyebrow {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: var(--accent);
 }
 
-li {
-    margin: 5px 0;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
-}
-
-th, td {
-    padding: 10px 5px;
-    text-align: left;
-    border-bottom: 1px solid #dce5e1;
-}
-
-td:not(:first-child),
-th:not(:first-child) {
-    text-align: right;
-}
-
-.total {
-    font-weight: 750;
-    background: #e7f5eb;
+.muted,small {
+    color: var(--muted);
 }
 
 .stats {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    margin: 16px 0;
+    grid-template-columns: repeat(auto-fit,minmax(130px,1fr));
+    gap: 12px;
+    margin: 22px 0;
 }
 
-.stats div {
-    background: #e8f3ee;
-    border-radius: 10px;
-    text-align: center;
-    padding: 12px 4px;
-    font-size: 12px;
-}
-
-.stats b {
-    display: block;
-    font-size: 21px;
-}
-
-.prize {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-}
-
-.prize div {
-    padding: 12px 5px;
-    text-align: center;
-    background: #f3f5f3;
-    border-radius: 10px;
-}
-
-.prize b {
-    display: block;
-    font-size: 21px;
-}
-
-/* Scoring System Styles */
-
-.scoring-summary {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    margin: 16px 0;
-}
-
-.scoring-summary div {
-    background: #103b32;
-    color: white;
-    text-align: center;
-    border-radius: 10px;
-    padding: 15px 5px;
-    font-size: 12px;
-}
-
-.scoring-summary b {
-    display: block;
-    color: #b9e6c9;
-    font-size: 22px;
-}
-
-.match-example {
-    border: 1px solid #d8e4df;
-    border-radius: 12px;
-    padding: 15px;
-    margin: 18px 0;
-    background: #f8fbf9;
-}
-
-.match-example h3 {
-    margin-top: 0;
-    color: #103b32;
-}
-
-.match-example th {
-    background: #e8f3ee;
-}
-
-.winning-score {
-    font-weight: 800;
-    color: #146c43;
-    background: #e0f3e6;
-}
-
-.match-winner {
-    background: #103b32;
-    color: white;
-    padding: 12px;
-    border-radius: 8px;
-    margin-top: 15px;
-    text-align: center;
-    font-weight: 700;
-}
-
-.not-required {
-    color: #72847c;
-}
-
-.important-reminder {
-    background: #fff7df;
-    border-left: 4px solid #d4a72c;
+.stat {
+    border: 1px solid var(--line);
+    background: #101b29;
     padding: 14px;
-    margin-top: 18px;
-    border-radius: 6px;
+    border-radius: 12px;
 }
 
-.important-reminder strong {
-    color: #765500;
+.stat strong {
+    display: block;
+    font-size: 24px;
+    color: var(--accent);
+}
+
+.stat span {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+a,button {
+    display: inline-block;
+    border-radius: 9px;
+    padding: 10px 15px;
+    font: inherit;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid var(--line);
+    color: var(--text);
+    background: #26364b;
+}
+
+a.primary {
+    background: var(--accent);
+    color: #162309;
+    border-color: var(--accent);
+}
+
+.actions,.legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.notice {
+    border-left: 4px solid #fbbf24;
+    padding: 12px 16px;
+    background: #302716;
+    border-radius: 6px;
+    color: #fef3c7;
+    margin-top: 15px;
+}
+
+.controls {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr auto;
+    gap: 12px;
+    align-items: end;
+}
+
+label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+input,select {
+    width: 100%;
+    min-height: 44px;
+    background: #0b1220;
+    border: 1px solid #526279;
+    border-radius: 8px;
+    padding: 10px;
+    color: var(--text);
+    font: inherit;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.legend span {
+    padding: 5px 9px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.schedule {
+    display: grid;
+    grid-template-columns: 110px repeat(4,minmax(0,1fr));
+    gap: 8px;
+}
+
+.heading {
+    font-weight: 800;
+    padding: 8px;
+    color: var(--muted);
+}
+
+.slot {
+    display: contents;
+}
+
+.time {
+    padding: 13px 5px;
+    font-weight: 800;
+    color: var(--accent);
+    font-size: 19px;
+}
+
+.time small {
+    display: block;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.fixture {
+    border-radius: 10px;
+    padding: 12px;
+    min-height: 120px;
+    overflow-wrap: anywhere;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid transparent;
+}
+
+.fixture .meta {
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: .3px;
+    margin-bottom: 6px;
+}
+
+.fixture strong {
+    font-size: 15px;
+}
+
+.vs {
+    font-size: 11px;
+    opacity: .85;
+    margin: 4px 0;
+}
+
+/* CATEGORY COLORS */
+
+.c0 {
+    background: #dbeafe;
+    color: #153e82;
+}
+
+.c1 {
+    background: #dcfce7;
+    color: #14532d;
+}
+
+.c2 {
+    background: #fce7f3;
+    color: #831843;
+}
+
+.c3 {
+    background: #fef3c7;
+    color: #78350f;
+}
+
+.c4 {
+    background: #ede9fe;
+    color: #4c1d95;
+}
+
+.empty {
+    border: 1px dashed var(--line);
+    color: var(--muted);
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    font-size: 13px;
+    min-height: 90px;
+}
+
+.courtlabel {
+    display: none;
+}
+
+.timeline {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(190px,1fr));
+    gap: 10px;
+}
+
+.timeline div {
+    padding: 12px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+}
+
+.timeline strong {
+    display: block;
+    color: var(--accent);
 }
 
 footer {
     text-align: center;
-    padding: 15px;
-    color: #365b50;
+    color: var(--muted);
+    padding: 12px;
+    font-size: 13px;
 }
 
-@media(max-width: 400px) {
+[hidden] {
+    display: none!important;
+}
+
+/* MOBILE RESPONSIVENESS */
+
+@media(max-width:780px) {
+
     main {
-        padding: 10px;
+        padding: 12px;
     }
 
-    section {
-        padding: 15px;
+    header,.panel {
+        padding: 16px;
     }
 
-    table {
-        font-size: 12px;
+    .controls {
+        grid-template-columns: 1fr 1fr;
     }
 
-    .match-example {
-        padding: 10px;
+    .searchwrap {
+        grid-column: 1/-1;
     }
 
-    .scoring-summary b {
-        font-size: 17px;
+    .schedule {
+        display: block;
     }
 
-    .match-winner {
-        font-size: 14px;
+    .heading {
+        display: none;
+    }
+
+    .slot {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        border-bottom: 1px solid var(--line);
+        padding: 12px 0;
+    }
+
+    .time {
+        grid-column: 1/-1;
+        padding: 0;
+    }
+
+    .time small {
+        display: inline;
+        margin-left: 10px;
+    }
+
+    .courtlabel {
+        display: block;
+        font-size: 11px;
+        font-weight: 800;
+        margin-bottom: 5px;
+    }
+
+    .fixture {
+        min-height: 130px;
+    }
+
+    .empty {
+        min-height: 80px;
+    }
+
+    .slot[hidden] {
+        display: none;
+    }
+}
+
+@media(max-width:370px) {
+
+    .slot,.controls {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* PRINT SETTINGS */
+
+@media print {
+
+    :root {
+        color-scheme: light;
+    }
+
+    body,header,.panel,.stat {
+        background: white!important;
+        color: #111!important;
+    }
+
+    main {
+        padding: 0;
+        max-width: none;
+    }
+
+    header,.panel {
+        border: 0;
+        padding: 8px;
+        margin: 0 0 10px;
+    }
+
+    .actions,.controls,#resultCount,footer {
+        display: none;
+    }
+
+    .muted,small,.heading,.empty,.time,
+    .stat strong,.stat span,.eyebrow,
+    .timeline strong {
+        color: #222!important;
+    }
+
+    .schedule {
+        display: grid;
+        grid-template-columns: 80px repeat(4,minmax(0,1fr));
+        gap: 4px;
+    }
+
+    .slot {
+        display: contents;
+    }
+
+    .heading {
+        display: block;
+    }
+
+    .fixture {
+        min-height: 75px;
+        padding: 6px;
+        break-inside: avoid;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+
+    .fixture strong {
+        font-size: 11px;
+    }
+
+    .courtlabel {
+        display: none;
+    }
+
+    .time {
+        font-size: 13px;
+    }
+
+    .notice {
+        color: #222;
+        background: #fff5d6;
+    }
+
+    .stats {
+        margin: 8px 0;
+    }
+
+    .stat {
+        padding: 6px;
+    }
+
+    .stat strong {
+        font-size: 18px;
+    }
+
+    @page {
+        size: landscape;
+        margin: 10mm;
     }
 }
 </style>
 </head>
 
 <body>
+
 <main>
 
-<!-- OFFICIAL ANNOUNCEMENT HEADER -->
-
 <header>
-    <small>OFFICIAL TOURNAMENT ANNOUNCEMENT</small>
 
-    <h1>🏸 BBC Mini Fun Game</h1>
+    <div class="eyebrow">
+        BBC MINI FUN GAME · PLAYER GUIDE
+    </div>
 
-    <p>
-        Hello, BBC Players! Ready na ba ang lahat?
-        Get your rackets ready for exciting games,
-        friendly competition, and good vibes!
-    </p>
+    <h1>Game timetable</h1>
+
+    <p>Friday, November 20, 2026 · Philippine time</p>
+
+    <div class="stats">
+
+        <div class="stat">
+            <strong>6:30 PM</strong>
+            <span>Call time</span>
+        </div>
+
+        <div class="stat">
+            <strong>7:00 PM</strong>
+            <span>Game start</span>
+        </div>
+
+        <div class="stat">
+            <strong>34</strong>
+            <span>Player slots · 17 pairs</span>
+        </div>
+
+        <div class="stat">
+            <strong>4</strong>
+            <span>Courts</span>
+        </div>
+
+        <div class="stat">
+            <strong>30</strong>
+            <span>Planned regular matches</span>
+        </div>
+
+        <div class="stat">
+            <strong>25 min</strong>
+            <span>Estimated match slot</span>
+        </div>
+
+    </div>
+
+    <div class="actions">
+
+        <a class="primary"
+           href="https://raven221b.github.io/bbc-tournament-game-map/">
+            View live results ↗
+        </a>
+
+        <button id="print" type="button">
+            Print schedule
+        </button>
+
+    </div>
+
+    <div class="notice">
+        <strong>
+            Roster update · November 19, 2026 · revision 456:
+        </strong>
+
+        MD Advanced and MD Intermediate verified against
+        current tournament boards. MXD, Intermediate and
+        Novice use previously recorded rosters and the
+        adaptive round-robin format; confirm these categories
+        against live results before play.
+        Names with * remain provisional.
+        Times are estimates.
+    </div>
+
 </header>
 
+<!-- EVENT PROGRAM -->
 
-<!-- SECTION 1: TIME SCHEDULE -->
+<section class="panel">
 
-<section>
+    <h2>Event program</h2>
 
-    <h2>🕖 1. Time Schedule</h2>
-
-    <div class="stats">
-        <div>
-            <b>6:30 PM</b>
-            Arrival
-        </div>
+    <div class="timeline">
 
         <div>
-            <b>7:00 PM</b>
-            Game starts
+            <strong>6:30–6:40 PM</strong>
+            Attendance &amp; registration
         </div>
 
         <div>
-            <b>4</b>
-            Courts
-        </div>
-    </div>
-
-    <ul>
-        <li>Please arrive early para maiwasan ang delays.</li>
-
-        <li>Be ready kapag tinawag ang inyong pair.</li>
-
-        <li>All matches follow the official tournament game map.</li>
-
-        <li>
-            Ang Match Controller ang bahala sa court assignments
-            at sequence ng games. Monitor your upcoming matches.
-        </li>
-    </ul>
-
-</section>
-
-
-<!-- SECTION 2: PARTICIPATION FEES -->
-
-<section>
-
-    <h2>💰 2. Participation Fees</h2>
-
-    <p>
-        Ang Fun Game Fee ay
-        <strong>₱150 per player</strong>,
-        separate sa regular queuing at shuttlecock fee.
-    </p>
-
-    <table>
-
-        <tr>
-            <th>Description</th>
-            <th>Amount</th>
-        </tr>
-
-        <tr>
-            <td>Fun Game Fee</td>
-            <td>₱150</td>
-        </tr>
-
-        <tr>
-            <td>Regular Queuing Fee</td>
-            <td>₱150</td>
-        </tr>
-
-        <tr>
-            <td>Shuttlecock Fee (₱50 × 5)</td>
-            <td>₱250</td>
-        </tr>
-
-        <tr class="total">
-            <td>Sample total</td>
-            <td>₱550</td>
-        </tr>
-
-    </table>
-
-    <p>
-        ₱150 + ₱150 + (₱50 × 5) =
-        <strong>₱550</strong>.
-        Actual total depends on shuttlecock consumption.
-    </p>
-
-</section>
-
-
-<!-- SECTION 3: POT MONEY DISTRIBUTION -->
-
-<section>
-
-    <h2>💵 3. Pot Money Distribution</h2>
-
-    <p>
-        Ang collected Fun Game fees sa bawat category
-        ay magiging pot money para sa top three winning pairs,
-        using the <strong>50-30-20 rule</strong>.
-    </p>
-
-    <div class="prize">
-
-        <div>
-            🥇 Champion
-            <b>50%</b>
+            <strong>6:40–6:50 PM</strong>
+            Warm-up
         </div>
 
         <div>
-            🥈 1st Runner-Up
-            <b>30%</b>
+            <strong>6:50–7:00 PM</strong>
+            Briefing &amp; court assignments
         </div>
 
         <div>
-            🥉 2nd Runner-Up
-            <b>20%</b>
-        </div>
-
-    </div>
-
-    <h3>Sample: 6 Teams / 12 Players</h3>
-
-    <p>
-        ₱150 per player · ₱300 per team · 6 teams
-        <br>
-        <strong>Total pot money: ₱1,800</strong>
-    </p>
-
-    <table>
-
-        <tr>
-            <th>Placement</th>
-            <th>Share</th>
-            <th>Per team</th>
-            <th>Per player</th>
-        </tr>
-
-        <tr>
-            <td>Champion</td>
-            <td>50%</td>
-            <td>₱900</td>
-            <td>₱450</td>
-        </tr>
-
-        <tr>
-            <td>1st Runner-Up</td>
-            <td>30%</td>
-            <td>₱540</td>
-            <td>₱270</td>
-        </tr>
-
-        <tr>
-            <td>2nd Runner-Up</td>
-            <td>20%</td>
-            <td>₱360</td>
-            <td>₱180</td>
-        </tr>
-
-        <tr class="total">
-            <td>Total</td>
-            <td>100%</td>
-            <td>₱1,800</td>
-            <td></td>
-        </tr>
-
-    </table>
-
-    <p>
-        Actual pot money depends on participating pairs per category.
-        Hindi kasama ang regular queuing at shuttlecock fees
-        sa prize pool.
-    </p>
-
-</section>
-
-
-<!-- SECTION 4: TOURNAMENT RULES -->
-
-<section>
-
-    <h2>📋 4. Tournament Rules &amp; Game Mechanics</h2>
-
-    <p>
-        <strong>Categories:</strong>
-        High, Middle, MXD, and Low Level.
-    </p>
-
-    <ul>
-
-        <li>
-            Round-robin format: each pair plays every other pair
-            within their assigned group.
-        </li>
-
-        <li>
-            All wins, losses, and actual match scores
-            are recorded in the official tournament system.
-        </li>
-
-        <li>
-            Report and verify scores with the Match Controller
-            after every match.
-        </li>
-
-        <li>
-            Only authorized Admins and Match Controllers
-            can change official results.
-        </li>
-
-        <li>
-            Observe proper sportsmanship and respect your opponents.
-        </li>
-
-    </ul>
-
-    <h3>High Level</h3>
-
-    <p>
-        Two groups. Ang top pair ng bawat group ay maglalaban
-        para sa 1st and 2nd Place. Ang second-ranked pair
-        ng bawat group ay maglalaban para sa 3rd Place.
-    </p>
-
-    <h3>Middle, MXD, and Low Levels</h3>
-
-    <p>
-        Top three winning pairs are automatically determined
-        based on final standings and tie-breaking rules.
-    </p>
-
-</section>
-
-
-<!-- SECTION 5: NEW SCORING SYSTEM -->
-
-<section id="scoring-system">
-
-    <h2>🏸 5. Scoring System &amp; Match Format</h2>
-
-    <p>
-        All matches will follow the
-        <strong>21-point, Best-of-3 Sets format with No Deuce.</strong>
-    </p>
-
-    <div class="scoring-summary">
-
-        <div>
-            <b>21</b>
-            Points per Set
+            <strong>7:00–11:35 PM</strong>
+            Regular matches
         </div>
 
         <div>
-            <b>Best of 3</b>
-            Match Format
+            <strong>11:35 PM–12:25 AM</strong>
+            Reserved tie-breaks, if needed
         </div>
 
         <div>
-            <b>No Deuce</b>
-            Scoring Rule
-        </div>
-
-    </div>
-
-    <h3>Official Scoring Rules</h3>
-
-    <ul>
-
-        <li>
-            Ang unang team na maka-reach ng
-            <strong>21 points</strong> ang winner ng set.
-        </li>
-
-        <li>
-            Kapag umabot ang score sa <strong>20–20</strong>,
-            ang unang team na maka-score ng 21st point
-            ang declared winner ng set.
-        </li>
-
-        <li>
-            Walang deuce, score extension,
-            o two-point advantage requirement.
-        </li>
-
-        <li>
-            Kapag nanalo ang isang team sa first and second sets,
-            automatic match winner na sila with a
-            <strong>2–0 result</strong>.
-        </li>
-
-        <li>
-            Kapag parehong may tig-isang set na panalo
-            <strong>(1–1)</strong>, magkakaroon ng third
-            and deciding set.
-        </li>
-
-        <li>
-            The third set will also follow the 21-point
-            scoring system with no deuce.
-        </li>
-
-        <li>
-            Ang team na unang manalo ng dalawang sets
-            ang official match winner.
-        </li>
-
-    </ul>
-
-
-    <!-- SAMPLE MATCH 1 -->
-
-    <div class="match-example">
-
-        <h3>Sample 1 — Straight Sets (2–0)</h3>
-
-        <p>
-            Team A wins both the first and second sets.
-        </p>
-
-        <table>
-
-            <thead>
-                <tr>
-                    <th>Set</th>
-                    <th>Team A</th>
-                    <th>Team B</th>
-                    <th>Winner</th>
-                </tr>
-            </thead>
-
-            <tbody>
-
-                <tr>
-                    <td>1st Set</td>
-                    <td class="winning-score">21</td>
-                    <td>18</td>
-                    <td><strong>Team A</strong></td>
-                </tr>
-
-                <tr>
-                    <td>2nd Set</td>
-                    <td class="winning-score">21</td>
-                    <td>20</td>
-                    <td><strong>Team A</strong></td>
-                </tr>
-
-                <tr class="not-required">
-                    <td>3rd Set</td>
-                    <td>—</td>
-                    <td>—</td>
-                    <td>Not Required</td>
-                </tr>
-
-                <tr class="total">
-                    <td>Sets Won</td>
-                    <td>2</td>
-                    <td>0</td>
-                    <td>Team A</td>
-                </tr>
-
-            </tbody>
-
-        </table>
-
-        <div class="match-winner">
-            🏆 MATCH WINNER: TEAM A (2–0)
-        </div>
-
-        <p>
-            Dahil nanalo ang Team A sa unang dalawang sets,
-            hindi na kailangan ng third set.
-        </p>
-
-    </div>
-
-
-    <!-- SAMPLE MATCH 2 -->
-
-    <div class="match-example">
-
-        <h3>Sample 2 — Deciding Set (2–1)</h3>
-
-        <p>
-            Both teams win one set each,
-            requiring a third and deciding set.
-        </p>
-
-        <table>
-
-            <thead>
-                <tr>
-                    <th>Set</th>
-                    <th>Team A</th>
-                    <th>Team B</th>
-                    <th>Winner</th>
-                </tr>
-            </thead>
-
-            <tbody>
-
-                <tr>
-                    <td>1st Set</td>
-                    <td class="winning-score">21</td>
-                    <td>20</td>
-                    <td><strong>Team A</strong></td>
-                </tr>
-
-                <tr>
-                    <td>2nd Set</td>
-                    <td>20</td>
-                    <td class="winning-score">21</td>
-                    <td><strong>Team B</strong></td>
-                </tr>
-
-                <tr>
-                    <td>3rd Set</td>
-                    <td>18</td>
-                    <td class="winning-score">21</td>
-                    <td><strong>Team B</strong></td>
-                </tr>
-
-                <tr class="total">
-                    <td>Sets Won</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>Team B</td>
-                </tr>
-
-            </tbody>
-
-        </table>
-
-        <div class="match-winner">
-            🏆 MATCH WINNER: TEAM B (2–1)
-        </div>
-
-        <p>
-            Dahil parehong may tig-isang set na panalo
-            ang dalawang teams, ang third set
-            ang nag-determine ng match winner.
-        </p>
-
-    </div>
-
-
-    <div class="important-reminder">
-
-        <strong>⚠️ IMPORTANT SCORING REMINDER</strong>
-
-        <p>
-            Maximum of <strong>21 points per set</strong>.
-            Kapag umabot sa <strong>20–20</strong>,
-            next point wins!
-        </p>
-
-        <p>
-            <strong>
-                NO DEUCE. NO EXTENSION.
-                NO TWO-POINT ADVANTAGE.
-            </strong>
-        </p>
-
-        <p>
-            This rule applies to all three sets.
-        </p>
-
-    </div>
-
-</section>
-
-
-<!-- SECTION 6: TIE-BREAKING RULES -->
-
-<section>
-
-    <h2>⚖️ 6. Tie-Breaking Rules</h2>
-
-    <p>
-        Kapag may pairs na pareho ang win-loss record,
-        susundin ang criteria in order:
-    </p>
-
-    <h3>Priority 1 — Total Wins</h3>
-
-    <p>
-        Kung sino ang may pinakamaraming wins,
-        siya ang mas mataas sa ranking.
-    </p>
-
-    <h3>Priority 2 — Point Difference</h3>
-
-    <p>
-        Formula:
-        <strong>
-            Total Points Scored − Total Points Conceded
-        </strong>
-    </p>
-
-    <table>
-
-        <tr>
-            <th>Team</th>
-            <th>Wins</th>
-            <th>Losses</th>
-            <th>Difference</th>
-        </tr>
-
-        <tr>
-            <td>Team A — Rank 1</td>
-            <td>2</td>
-            <td>1</td>
-            <td>+15</td>
-        </tr>
-
-        <tr>
-            <td>Team B — Rank 2</td>
-            <td>2</td>
-            <td>1</td>
-            <td>+8</td>
-        </tr>
-
-        <tr>
-            <td>Team C — Rank 3</td>
-            <td>2</td>
-            <td>1</td>
-            <td>−3</td>
-        </tr>
-
-    </table>
-
-    <p>
-        Ang may pinakamataas na point difference
-        ang mangunguna.
-    </p>
-
-    <h3>Priority 3 — Total Points Scored</h3>
-
-    <p>
-        Kapag pareho pa rin ang point difference,
-        ang pair na may highest total points scored
-        ang aangat.
-    </p>
-
-    <h3>Priority 4 — Additional Head-to-Head Matches</h3>
-
-    <ul>
-
-        <li>
-            Two-way tie: additional head-to-head match.
-        </li>
-
-        <li>
-            Three-way tie: additional matches among
-            the three tied pairs.
-        </li>
-
-        <li>
-            Match Controller ang magse-set at magre-record
-            ng additional matches to determine final rankings.
-        </li>
-
-        <li>
-            Kung unresolved pa rin, ang organizing committee
-            ang magde-determine ng next course of action.
-        </li>
-
-    </ul>
-
-</section>
-
-
-<!-- SECTION 7: TOURNAMENT AWARDS -->
-
-<section>
-
-    <h2>🏆 7. Tournament Awards</h2>
-
-    <p>
-        Each category will have three winning pairs:
-    </p>
-
-    <p>
-
-        🥇 <strong>Champion:</strong>
-        Gold medals + 50% of pot money
-
-        <br>
-
-        🥈 <strong>1st Runner-Up:</strong>
-        Silver medals + 30%
-
-        <br>
-
-        🥉 <strong>2nd Runner-Up:</strong>
-        Bronze medals + 20%
-
-    </p>
-
-    <div class="stats">
-
-        <div>
-            <b>4</b>
-            Categories
-        </div>
-
-        <div>
-            <b>12</b>
-            Winning pairs
-        </div>
-
-        <div>
-            <b>24</b>
-            Medal recipients
+            <strong>12:30 AM · Sat, Nov 21</strong>
+            Target awarding ceremony
         </div>
 
     </div>
 
 </section>
 
+<!-- SEARCH AND FILTERS -->
 
-<!-- SECTION 8: SPORTSMANSHIP -->
+<section class="panel">
 
-<section>
+    <h2>Find your games</h2>
 
-    <h2>🤝 8. Sportsmanship &amp; Fair Play</h2>
+    <div class="controls">
 
-    <p>
-        Remember, Fun Game ito! Competitive tayo sa loob ng court,
-        pero friends pa rin tayo pagkatapos ng laro.
-        Respect our opponents, fellow players,
-        Match Controllers, and organizers.
+        <div class="searchwrap">
+
+            <label for="search">
+                Player or pair name
+            </label>
+
+            <input
+                id="search"
+                type="search"
+                placeholder="e.g. Adrian, Dave, Yohan"
+                autocomplete="off"
+            >
+
+        </div>
+
+        <div>
+
+            <label for="category">
+                Category
+            </label>
+
+            <select id="category">
+                <option value="all">
+                    All categories
+                </option>
+            </select>
+
+        </div>
+
+        <div>
+
+            <label for="court">
+                Court
+            </label>
+
+            <select id="court">
+                <option value="all">All courts</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+            </select>
+
+        </div>
+
+        <button id="reset" type="button">
+            Clear filters
+        </button>
+
+    </div>
+
+    <p
+        id="resultCount"
+        class="muted"
+        role="status"
+        aria-live="polite">
     </p>
 
-    <p>
-        Ang goal natin ay hindi lang manalo
-        o makakuha ng pot money, kundi mag-enjoy,
-        magkaroon ng magandang samahan,
-        at mas mapalakas ang ating badminton community.
-    </p>
-
-    <p>
-        Good luck sa lahat ng participants!
-    </p>
+    <div id="legend" class="legend"></div>
 
 </section>
 
+<!-- COURT ASSIGNMENTS -->
 
-<!-- FOOTER -->
+<section class="panel">
+
+    <h2>Court assignments</h2>
+
+    <p class="muted">
+
+        Be ready 10 minutes before your match.
+
+        Available courts may be used for delays
+        or additional matches.
+
+        Every pair has at least one 25-minute slot
+        between scheduled games.
+
+        The 25-minute match slots are estimates;
+        best-of-three matches can run longer.
+
+    </p>
+
+    <div id="schedule" class="schedule"></div>
+
+    <noscript>
+        Enable JavaScript to view the timetable.
+    </noscript>
+
+</section>
+
+<!-- PLAYER REMINDERS -->
+
+<section class="panel">
+
+    <h2>Player reminders</h2>
+
+    <p>
+        All players must arrive at 6:30 PM.
+
+        Match times are estimates, not fixed game limits.
+
+        Each category has three podium places.
+
+        Any additional head-to-head matches are
+        determined by the official live results system.
+    </p>
+
+</section>
 
 <footer>
-
-    <strong>
-        🔥 PLAY HARD. PLAY FAIR. HAVE FUN!
-    </strong>
-
-    <p>
-        Kita-kits sa court, BBC Fam! 🏸
-    </p>
-
-    <small>
-        BBC Mini Fun Game Organizing Committee
-    </small>
-
+    BBC Mini Fun Game · Read-only schedule ·
+    No database connection or write operations
 </footer>
 
 </main>
+
+<script>
+
+/* =====================================
+   PLAYER ROSTER
+   H2H-R5 ADAPTIVE ROUND ROBIN
+   REVISION 456
+
+   34 Players
+   17 Pairs
+   30 Planned Regular Matches
+===================================== */
+
+const cats = [
+
+    /* CATEGORY 0: MD ADVANCED
+       DOUBLE ROUND ROBIN */
+
+    {
+        "n": "MD Advanced",
+        "p": [
+            "Lian / Benjie",
+            "Yap / Aries",
+            "Tristan / Dem"
+        ]
+    },
+
+    /* CATEGORY 1: MD INTERMEDIATE
+       SINGLE ROUND ROBIN */
+
+    {
+        "n": "MD Intermediate",
+        "p": [
+            "Charle / Adrian",
+            "Jeremy / Darnz",
+            "Nass / Jheken",
+            "Eng / Odie"
+        ]
+    },
+
+    /* CATEGORY 2: MXD
+       DOUBLE ROUND ROBIN */
+
+    {
+        "n": "MXD",
+        "p": [
+            "Mark / Yvette",
+            "Angelo / Clarisse",
+            "Vlad / Lani"
+        ]
+    },
+
+    /* CATEGORY 3: INTERMEDIATE
+       SINGLE ROUND ROBIN */
+
+    {
+        "n": "Intermediate",
+        "p": [
+            "Luigi / Othan",
+            "Aaron / Liam",
+            "Yohan / Carlo",
+            "Dave / Axel"
+        ]
+    },
+
+    /* CATEGORY 4: NOVICE
+       DOUBLE ROUND ROBIN */
+
+    {
+        "n": "Novice",
+        "p": [
+            "Adel / Rechell*",
+            "Pauwy / Nooky*",
+            "Lucy / Grace*"
+        ]
+    }
+
+];
+
+/* =====================================
+   FOUR-COURT MATCH SCHEDULE
+
+   FORMAT:
+
+   [
+       Category Index,
+       Match Number,
+       First Pair Index,
+       Second Pair Index
+   ]
+
+   CATEGORY INDEX:
+
+   0 = MD Advanced
+   1 = MD Intermediate
+   2 = MXD
+   3 = Intermediate
+   4 = Novice
+
+   Null = Available court
+
+   25 minutes per time slot
+===================================== */
+
+const slots = [
+
+    /* 7:00 PM - 7:25 PM */
+
+    [
+        [0, 1, 0, 1],
+        [2, 1, 0, 1],
+        [4, 1, 0, 1],
+        null
+    ],
+
+    /* 7:25 PM - 7:50 PM */
+
+    [
+        [1, 1, 0, 1],
+        [1, 2, 2, 3],
+        [3, 1, 0, 1],
+        [3, 2, 2, 3]
+    ],
+
+    /* 7:50 PM - 8:15 PM */
+
+    [
+        [0, 2, 1, 2],
+        [2, 2, 1, 2],
+        [4, 2, 1, 2],
+        null
+    ],
+
+    /* 8:15 PM - 8:40 PM
+       BUFFER / AVAILABLE COURTS */
+
+    [
+        null,
+        null,
+        null,
+        null
+    ],
+
+    /* 8:40 PM - 9:05 PM */
+
+    [
+        [0, 3, 0, 2],
+        [2, 3, 0, 2],
+        [4, 3, 0, 2],
+        null
+    ],
+
+    /* 9:05 PM - 9:30 PM */
+
+    [
+        [1, 3, 0, 3],
+        [1, 4, 1, 2],
+        [3, 3, 0, 3],
+        [3, 4, 1, 2]
+    ],
+
+    /* 9:30 PM - 9:55 PM */
+
+    [
+        [0, 4, 0, 1],
+        [2, 4, 0, 1],
+        [4, 4, 0, 1],
+        null
+    ],
+
+    /* 9:55 PM - 10:20 PM
+       BUFFER / AVAILABLE COURTS */
+
+    [
+        null,
+        null,
+        null,
+        null
+    ],
+
+    /* 10:20 PM - 10:45 PM */
+
+    [
+        [0, 5, 1, 2],
+        [2, 5, 1, 2],
+        [4, 5, 1, 2],
+        null
+    ],
+
+    /* 10:45 PM - 11:10 PM */
+
+    [
+        [1, 5, 0, 2],
+        [1, 6, 3, 1],
+        [3, 5, 0, 2],
+        [3, 6, 3, 1]
+    ],
+
+    /* 11:10 PM - 11:35 PM */
+
+    [
+        [0, 6, 0, 2],
+        [2, 6, 0, 2],
+        [4, 6, 0, 2],
+        null
+    ]
+
+];
+
+/* =====================================
+   HELPER FUNCTIONS
+===================================== */
+
+const $ = id => document.getElementById(id);
+
+function el(tag, cls, txt) {
+
+    const e = document.createElement(tag);
+
+    if (cls) {
+        e.className = cls;
+    }
+
+    if (txt !== undefined) {
+        e.textContent = txt;
+    }
+
+    return e;
+}
+
+/* =====================================
+   TIME CALCULATIONS
+===================================== */
+
+function time(i) {
+
+    let m = 19 * 60 + i * 25;
+
+    let h = Math.floor(m / 60) % 24;
+
+    return `${h % 12 || 12}:${String(m % 60)
+        .padStart(2,'0')} ${h >= 12 ? 'PM' : 'AM'}`;
+
+}
+
+/* =====================================
+   CATEGORY FILTERS AND LEGEND
+===================================== */
+
+cats.forEach((c,i) => {
+
+    let o = el('option','',c.n);
+
+    o.value = i;
+
+    $('category').append(o);
+
+    $('legend').append(
+        el('span','c'+i,c.n)
+    );
+
+});
+
+/* =====================================
+   RENDER GAME SCHEDULE
+===================================== */
+
+function render() {
+
+    let q = $('search')
+        .value
+        .trim()
+        .toLowerCase();
+
+    let category = $('category').value;
+
+    let court = $('court').value;
+
+    let filtered =
+        q ||
+        category !== 'all' ||
+        court !== 'all';
+
+    let count = 0;
+
+    const root = $('schedule');
+
+    root.replaceChildren();
+
+    root.append(
+        el('div','heading','Time')
+    );
+
+    for (let j = 1; j <= 4; j++) {
+
+        root.append(
+            el('div','heading','Court '+j)
+        );
+
+    }
+
+    slots.forEach((row,i) => {
+
+        let wrap = el('div','slot');
+
+        let t = el(
+            'div',
+            'time',
+            time(i)
+        );
+
+        t.append(
+            el(
+                'small',
+                '',
+                'to '+time(i+1)
+            )
+        );
+
+        wrap.append(t);
+
+        let hits = 0;
+
+        row.forEach((m,j) => {
+
+            let ok = false;
+
+            if (m) {
+
+                let c = cats[m[0]];
+
+                let a = c.p[m[2]];
+
+                let b = c.p[m[3]];
+
+                let hay = (a+' '+b)
+                    .toLowerCase();
+
+                ok =
+
+                    (!q || hay.includes(q)) &&
+
+                    (
+                        category === 'all' ||
+                        category === String(m[0])
+                    ) &&
+
+                    (
+                        court === 'all' ||
+                        court === String(j+1)
+                    );
+
+                if (ok) {
+
+                    hits++;
+
+                    count++;
+
+                    let f = el(
+                        'div',
+                        'fixture c'+m[0]
+                    );
+
+                    f.append(
+
+                        el(
+                            'div',
+                            'courtlabel',
+                            'COURT '+(j+1)
+                        ),
+
+                        el(
+                            'div',
+                            'meta',
+                            c.n+' · Match '+m[1]
+                        ),
+
+                        el(
+                            'strong',
+                            '',
+                            a
+                        ),
+
+                        el(
+                            'span',
+                            'vs',
+                            'VS'
+                        ),
+
+                        el(
+                            'strong',
+                            '',
+                            b
+                        )
+
+                    );
+
+                    wrap.append(f);
+
+                }
+
+            }
+
+            if (!ok) {
+
+                let x = el(
+                    'div',
+                    'empty',
+                    m ? '—' : 'Available'
+                );
+
+                x.setAttribute(
+
+                    'aria-label',
+
+                    'Court '+(j+1)+
+                    (m ? ' filtered' : ' available')
+
+                );
+
+                wrap.append(x);
+
+            }
+
+        });
+
+        if (filtered && !hits) {
+
+            wrap.hidden = true;
+
+        }
+
+        root.append(wrap);
+
+    });
+
+    $('resultCount').textContent =
+
+        count+
+
+        ' matching regular '+
+
+        (count === 1 ? 'match' : 'matches')+
+
+        (filtered ? ' · filters applied' : '');
+
+    if (!count) {
+
+        let msg = el(
+
+            'p',
+
+            'muted',
+
+            'No games match your filters. Try another player name or clear the filters.'
+
+        );
+
+        root.append(msg);
+
+    }
+
+}
+
+/* =====================================
+   EVENT LISTENERS
+===================================== */
+
+['search','category','court'].forEach(id => {
+
+    $(id).addEventListener(
+
+        id === 'search' ? 'input' : 'change',
+
+        render
+
+    );
+
+});
+
+/* CLEAR FILTERS */
+
+$('reset').addEventListener('click',() => {
+
+    $('search').value = '';
+
+    $('category').value = 'all';
+
+    $('court').value = 'all';
+
+    render();
+
+    $('search').focus();
+
+});
+
+/* PRINT SCHEDULE */
+
+$('print').addEventListener(
+    'click',
+    () => window.print()
+);
+
+/* INITIALIZE SCHEDULE */
+
+render();
+
+</script>
+
 </body>
 </html>
